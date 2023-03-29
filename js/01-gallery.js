@@ -1,36 +1,69 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
-//są zdjecia i odstępy , nie otwieraja sie duże po kliknięciu
-const galleryEl = document.querySelector(".gallery");
+console.log(galleryItems);
 
-for (const item of galleryItems) {
-  galleryEl.insertAdjacentHTML(
+const galleryEl = document.querySelector(".gallery");
+console.log(galleryEl);
+
+for (let item of galleryItems) {
+  const imageItem = document.createElement("li");
+  galleryEl.append(imageItem);
+
+  imageItem.insertAdjacentHTML(
     "beforeend",
-    `<li class="gallery__item">
-    <a class="gallery__link" href="${item.original}">
-      <img
-        class="gallery__image"
-        src="${item.preview}"
-        data-source="${item.original}"
-        alt="${item.description}"
-      />
-    </a>
-  </li>`
+    `<a class="gallery__link" href="${item.original}">
+  <img
+  class="gallery__image"
+  src="${item.preview}"
+  data-source="${item.original}"
+  alt="${item.description}"
+/>
+</a>`
   );
 }
 
 galleryEl.addEventListener("click", (event) => {
   event.preventDefault();
+
+  const instance = basicLightbox.create(
+    `<img src="${event.target.dataset.source}"/>`,
+    {}
+  );
+
+  instance.show();
 });
 
-galleryEl.onclick = () => {
-  basicLightbox
-    .create(
-      `<img width="1400" height="900" src="https://placehold.it/1400x900">`
-    )
-    .show();
-};
+//są zdjecia i odstępy , nie otwieraja sie duże po kliknięciu
+// const galleryEl = document.querySelector(".gallery");
+
+// for (const item of galleryItems) {
+//   galleryEl.insertAdjacentHTML(
+//     "beforeend",
+//     `<li class="gallery__item">
+//     <a class="gallery__link" href="${item.original}">
+//       <img
+//         class="gallery__image"
+//         src="${item.preview}"
+//         data-source="${item.original}"
+//         alt="${item.description}"
+//       />
+//     </a>
+//   </li>`
+//   );
+// }
+
+// galleryEl.addEventListener("click", (event) => {
+//   event.preventDefault();
+// });
+
+// galleryEl.onclick = () => {
+//   basicLightbox
+//     .create(
+//       `<img width="1400" height="900" src="https://placehold.it/1400x900">`
+//     )
+//     .show();
+// };
 
 // duze zdjecia
 // const LiElement = document.createElement("li");
@@ -65,19 +98,6 @@ galleryEl.onclick = () => {
 //   gallery.show();
 // });
 
-// chat GPT
-// const gallery = document.querySelector(".gallery");
-// const images = gallery.querySelectorAll("img");
-
-// images.forEach((image) => {
-//   image.addEventListener("click", () => {
-//     images.forEach((image) => {
-//       image.classList.remove("active");
-//     });
-//     image.classList.add("active");
-//   });
-// });
-
 //3 zdjecia bez odstepów
 // let gallerylist = document.querySelector(".gallery");
 
@@ -110,3 +130,33 @@ galleryEl.onclick = () => {
 
 //     instance.show();
 //   });
+
+//sa juz odstepy i zdjecia sie wczytuja
+// const ul = document.querySelector(".gallery");
+
+// for (const gallery of galleryItems) {
+//   const Elementli = `<div class= "gallery__item">
+//       <a class = "gallery__link" href="${gallery.original}">
+//         <img
+
+//           class="gallery__image"
+//           src="${gallery.preview}"
+//           data-source="${gallery.original}"
+//           alt="${gallery.description}"
+//         />
+//       </a>
+//     </div>`;
+//   const listElement = document.createElement("li");
+//   listElement.innerHTML = Elementli;
+//   ul.appendChild(listElement);
+// }
+// console.log(galleryItems);
+
+// ul.addEventListener("click", (ev) => {
+//   ev.preventDefault();
+
+//   const instance = window.basicLightbox.create(
+//     ` <img src="${event.target.dataset.source}" width="800" height="600">`
+//   );
+//   instance.show();
+// });
